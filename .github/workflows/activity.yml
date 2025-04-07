@@ -1,0 +1,24 @@
+name: Daily Fake Activity
+
+on:
+  schedule:
+    - cron: '0 9 * * *'
+    - cron: '0 13 * * *'
+    - cron: '0 17 * * *'
+  workflow_dispatch:
+
+jobs:
+  fake-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Update Activity File
+        run: |
+          echo "Fake commit at $(date)" >> .activity_log.txt
+          git config --global user.name "Dein Name"
+          git config --global user.email "deine@email.com"
+          git add .activity_log.txt
+          git commit -m "GitHub Bot Commit: $(date)"
+          git push

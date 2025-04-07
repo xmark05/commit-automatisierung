@@ -10,9 +10,12 @@ on:
 jobs:
   fake-commit:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # <-- Token mit Schreibrechten
 
       - name: Update Activity File
         run: |
